@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/fontawesome-free-5.15.4-web/css/all.min.css">
+	<link rel="stylesheet" href="./css/bootstrap-3.3.2-dist/js/bootstrap.min.js">
+	<link rel="stylesheet" href="./css/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+	<script src="./js/main.js"></script>
+	<script src="./js/jquery-3.6.0.min.js"></script>
+	<link href='assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<link href='assets/css/fullcalendar.css' rel='stylesheet' />
+	<script src='assets/js/jquery-1.10.2.js' type="text/javascript"></script>
+	<script src='assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
+	<script src='assets/js/fullcalendar.js' type="text/javascript"></script>
+	<link rel="stylesheet" href="./css/teacher.css">
+</head>
+<style>
+	body {
+		text-align: center;
+		font-size: 14px;
+		font-family: "Helvetica Nueue", Arial, Verdana, sans-serif;
+		background-color: #eee;
+	}
+
+	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		text-align: left;
+	}
+
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+	}
+
+	.external-event {
+		/* try to mimick the look of a real event */
+		margin: 10px 0;
+		padding: 2px 4px;
+		background: #3366CC;
+		color: #fff;
+		font-size: .85em;
+		cursor: pointer;
+	}
+
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+	}
+
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+	}
+
+	#calendar {
+		float: left;
+		margin: -15px auto;
+		width: 900px;
+		background-color: #FFFFFF;
+		border-radius: 6px;
+		box-shadow: 0 1px 2px #C3C3C3;
+	}
+</style>
+<script>
+
+    // 모달창 팝업
+    $(() => {
+        $('.fa-check-circle').click(() => {
+            $(".one").fadeToggle();
+        });
+    })
+    $(() => {
+        $('.fa-times-circle').click(() => {
+            $(".two").fadeToggle();
+        });
+    })
+    $(() => {
+        $('.xone').click(() => {
+            $(".one").fadeToggle();
+        });
+    })
+
+	$(() => {
+        $('.xtwo').click(() => {
+            $(".two").fadeToggle();
+        });
+    })
+
+	
+
+
+
+
+	$(document).ready(function () {
+		const offset = new Date().getTimezoneOffset() * 60000;
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+
+		/*  className colors
+
+		className: default(transparent), important(red), chill(pink), success(green), info(blue)
+
+		*/
+
+
+		/* initialize the external events
+		-----------------------------------------------------------------*/
+
+		$('#external-events div.external-event').each(function () {
+
+			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+			// it doesn't need to have a start or end
+			var eventObject = {
+				title: $.trim($(this).text()) // use the element's text as the event title
+			};
+
+			// store the Event Object in the DOM element so we can get to it later
+			$(this).data('eventObject', eventObject);
+
+			// make the event draggable using jQuery UI
+			$(this).draggable({
+				zIndex: 999,
+				revert: true,      // will cause the event to go back to its
+				revertDuration: 0  //  original position after the drag
+			});
+
+		});
+
+
+		/* initialize the calendar
+		-----------------------------------------------------------------*/
+
+		var calendar = $('#calendar').fullCalendar({
+
+			header: {
+				left: 'title',
+				center: 'month',
+				right: 'prev,next today'
+			},
+			editable: true,
+			firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+			selectable: true,
+			defaultView: 'month',
+
+			axisFormat: 'h:mm',
+			columnFormat: {
+				month: 'ddd',    // Mon
+				week: 'ddd d', // Mon 7
+				day: 'dddd M/d',  // Monday 9/7
+				agendaDay: 'dddd d'
+			},
+			titleFormat: {
+				month: '', // September 2009
+				week: "MMMM yyyy", // September 2009
+				day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
+			},
+			allDaySlot: false,
+			selectHelper: true,
+			select: function (start, end, allDay) {
+				var title = prompt('Event Title:');
+				if (title) {
+
+					var start = new Date(start - offset).toISOString();
+
+					var end = new Date(end - offset).toISOString();
+
+					$.ajax({
+						url: '/api/add-event.php',
+						data: 'title=' + title + '&start=' + start + '&end=' + end,
+						type: "POST",
+						success: function (data) {
+
+						}
+					});
+					calendar.fullCalendar('renderEvent',
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay,
+							color: 'orange'
+						},
+						true // make the event "stick"
+					);
+				}
+				calendar.fullCalendar('unselect');
+			},
+			eventDrop: function (event, delta) {
+				console.log(event.start)
+				var start = new Date(event.start - offset).toISOString();
+				console.log(start)
+				var end = new Date(event.end - offset).toISOString();
+				$.ajax({
+					url: '/api/edit-event.php',
+					data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
+					type: "POST",
+					success: function (response) {
+
+					}
+				});
+			},
+
+			eventClick: function (event) {
+				var deleteMsg = confirm("Do you really want to delete?");
+				if (deleteMsg) {
+					$.ajax({
+						type: "POST",
+						url: "/api/delete-event.php",
+						data: "&id=" + event.id,
+						success: function (response) {
+							$('#calendar').fullCalendar('removeEvents', event.id);
+						}
+					});
+				}
+
+
+			},
+
+			eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+				console.log(event.start)
+				var start = new Date(event.start - offset).toISOString();
+				console.log(start)
+				var end = new Date(event.end - offset).toISOString();
+				$.ajax({
+					url: '/api/edit-event.php',
+					data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
+					type: "POST",
+					success: function (response) {
+
+					}
+				});
+
+			}
+			,
+			droppable: true, // this allows things to be dropped onto the calendar !!!
+			drop: function (date, allDay) { // this function is called when something is dropped
+
+				// retrieve the dropped element's stored Event Object
+				var originalEventObject = $(this).data('eventObject');
+
+				// we need to copy it, so that multiple events don't have a reference to the same object
+				var copiedEventObject = $.extend({}, originalEventObject);
+
+				// assign it the date that was reported
+				copiedEventObject.start = date;
+				copiedEventObject.allDay = allDay;
+
+				// render the event on the calendar
+				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+				// is the "remove after drop" checkbox checked?
+				if ($('#drop-remove').is(':checked')) {
+					// if so, remove the element from the "Draggable Events" list
+					$(this).remove();
+				}
+
+			},
+
+			eventSources: [
+
+				// your event source
+				{
+					url: '/api/fetch-event.php', // use the `url` property
+					color: 'orange',    // an option!
+					textColor: 'black'  // an option!
+				}
+
+				// any other sources...
+
+			],
+
+
+		})
+
+	});
+</script>
+
+<body>
+	<div class="wrap">
+		<!-- 헤더 시작 -->
+		<header>
+			<div id="header-list">
+				<div class="t">
+					<a href="./index.html"><i class="far fa-calendar"></i></a>
+				</div>
+				<ul class="list-menu">
+					<li class="menu"><a href="notice.php">공지사항</a></li>
+					<li class="menu"><a href="./statistic.html">연간 및 월간 통계</a></li>
+				</ul>
+				<div class="t">
+					<li class="main login"><a href="login.html">로그인</a></li>
+				</div>
+			</div>
+		</header>
+        <!-- 헤더 끝 -->
+        <!-- 메인 (캘린더) 시작 -->
+        <section id="main">
+            <div id='wrap'>
+
+                <div id='calendar'></div>
+                
+                <div style='clear:both'></div>
+                </div>
+        </section>
+        <!-- 메인 (캘린더) 끝 -->
+
+        <!-- 오른쪽 탭 시작 -->
+        <section id="right-sidebar">
+            <div id="side-date">
+                <div class="side-date-wrap">
+                    <span class="side-date-date">2021년 · 6월 15일 · 월요일</span>
+                </div>
+            </div>
+
+            <div id="t-vacation">
+                <div class="t-vacation-wrap">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive project-list">
+                                <table class="table table-striped table-centered table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Value</th>
+                                            <th scope="col">Reason</th>
+                                            <th scope="col">승인</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>기능반</td>
+                                            <td>2021-11-11</td>
+                                            <td>
+                                                백신 접종
+                                            </td>
+                                            <td>
+                                                <div class="action">
+                                                    <i id="check" class="fas fa-check-circle check"></i>
+                                                    <i id="times" class="fas fa-times-circle check"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>홍길동</td>
+                                            <td>2021-11-13</td>
+                                            <td>
+                                                백신 접종
+                                            </td>
+                                            <td>
+                                                <div class="action">
+                                                    <i id="check" class="fas fa-check-circle check"></i>
+                                                    <i id="times" class="fas fa-times-circle check"></i>
+                                                </div>
+                                               
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="empty">
+                <div class="empty-wrap">
+                </div>
+            </div>
+        </section>
+        <!-- 오른쪽 탭 끝 -->
+
+        <!-- 푸터 시작 -->
+        <!-- 푸터 끝 -->
+    </div>
+
+    <!-- 모달 -->
+    <div class="modal one">
+        <div class="content">
+            <h3 class="title">기능반 휴가</h3>
+            <div class="name">
+                <h4>이름</h4>
+                <p>정수민</p>
+            </div>
+            <div class="date">
+                <h4>날짜</h4>
+                <p>2021.11.13</p>
+            </div>
+            <div class="reason">
+                <h4>사유</h4>
+                <p>백신 접종</p>
+            </div>
+            <button class="accept">승인하기</button>
+            <button class="xone">닫기</button>
+        </div>
+    </div>
+
+	<div class="modal two">
+        <div class="content">
+            <h3 class="title">기능반 휴가</h3>
+            <div class="name">
+                <h4>이름</h4>
+                <p>정수민</p>
+            </div>
+            <div class="date">
+                <h4>날짜</h4>
+                <p>2021.11.13</p>
+            </div>
+            <div class="reason">
+                <h4>사유</h4>
+                <p>백신 접종</p>
+            </div>
+            <button class="decline">반려하기</button>
+            <button class="xtwo">닫기</button>
+        </div>
+    </div>
+
+    <footer>
+        <div id="copyright">
+            <div class="copyright-wrap">
+                <span class="copyright-text">copyright ⓒ 2021 All rights reserved by YangYoung
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

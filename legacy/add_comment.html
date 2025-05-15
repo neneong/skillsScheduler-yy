@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/add_comment.css">
+    <link rel="stylesheet" href="./css/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- 헤더 시작 -->
+    <header>
+        <div id="header-list">
+            <div class="t">
+                <a href="./index.html"><i class="far fa-calendar"></i></a>
+            </div>
+            <ul class="list-menu">
+                <li class="menu"><a href="notice.php">공지사항</a></li>
+                <li class="menu"><a href="./statistic.html">연간 및 월간 통계</a></li>
+            </ul>
+            <div class="t">
+                <li class="main login"><a href="login.html">로그인</a></li>
+            </div>
+        </div>
+    </header>
+    <!-- 헤더끝 -->
+    <div class="wrap">
+        <div class="main">
+            <div class="main-wrap">
+                <h1 class="tit">글 추가</h1>
+                <div class="title">
+                    <input type="textfield" placeholder="제목" class="write-tit-textfield">
+                    <div class="comment">
+                        <input type="checkbox" name="comment-allow" class="comment-checkbox">
+                        <span>댓글 허용</span>
+                    </div>
+                </div>
+                <div data-tiny-editor contenteditable="true" class="editor">
+                    
+                </div>
+                <!-- <script src="/dist/bundle.js"></script> -->
+                <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
+                <div class="add-botton">
+                    <button class="add">추가</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <!-- 푸터 시작 -->
+    <footer>
+        <div id="copyright">
+            <div class="copyright-wrap">
+                <span class="copyright-text">copyright ⓒ 2021 All rights reserved by YangYoung</span>
+            </div>
+        </div>
+    </footer>
+    <!-- 푸터 끝 -->
+    </div>
+
+</body>
+
+</html>

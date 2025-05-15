@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Noto-Sans KR';
+    src: url('./Noto_Sans_KR/NotoSansKR-Regular.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Noto-Sans KR';
+}
+li {
+    list-style:none;
+    
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: rgb(41, 41, 96);
+    
+}
+header {
+    width: 100%;
+    background-color: rgb(41, 41, 96);
+    height: 70px;
+    
+}
+#header-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(41, 41, 96);
+    height: 100%;
+    
+}
+header li a:hover {
+    color: rgb(255, 196, 0);
+    text-decoration: unset;
+}
+
+.list-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px;
+}
+
+.fa-calendar {
+    font-size: 40px;
+    color: #F1F0EC;
+    
+}
+.list-menu a:nth-child(1) {
+  margin: 0px 15px;
+}
+.list-menu > li > a {
+    color: rgb(255, 255, 255);
+}
+
+.login a, .logout a {
+    border-radius: 20px;
+    padding: 5px 30px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+#login-main {
+    margin-top: 8%;
+}
+
+#login {
+    display: flex;
+    justify-content: center;
+
+}
+
+.login-wrap {
+    background-color: #fff;
+    padding: 100px 60px 100px 60px;
+    border-radius: 15px;
+}
+
+.login-wrap > .main-tit {
+    text-align: center;
+}
+
+.main-tit > .tit {
+    text-align: center;
+    font-weight: bold;
+}
+.login-wrap .main-form {
+    position: relative;
+    margin-top: 70px;
+}
+
+.login-form input {
+    width: 350px;
+    height: 50px;
+    font-size: 14px;
+    border: 1px solid rgb(219, 219, 219);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form input[type = submit] {
+    width: 350px;
+    height: 55px;
+    background-color: rgba(41, 41, 96, 0.78);
+    color: #fff;
+    font-weight: bolder;
+    font-size: 15px;
+}

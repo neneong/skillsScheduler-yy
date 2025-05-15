@@ -1,0 +1,202 @@
+@font-face {
+    font-family: 'Noto-Sans KR';
+    src: url('./Noto_Sans_KR/NotoSansKR-Regular.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Noto-Sans KR';
+    color: black;
+}
+
+.wrap {
+    overflow: hidden;
+    width: auto;
+    list-style: none;
+}
+
+/* 헤더 시작 */
+header {
+    width: 100%;
+    background-color: rgb(41, 41, 96);
+    height: 70px;
+}
+
+#header-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(41, 41, 96);
+    height: 100%;
+}
+header li a:hover {
+    color: rgb(255, 196, 0);
+    text-decoration: unset;
+}
+
+.list-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px;
+}
+
+.fa-calendar {
+    font-size: 40px;
+    color: #F1F0EC;
+    
+}
+.list-menu a:nth-child(1) {
+  margin: 0px 15px;
+}
+.list-menu > li > a {
+    color: rgb(255, 255, 255);
+}
+
+.login a, .logout a {
+    border-radius: 20px;
+    padding: 5px 30px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* 헤더 끝 */
+
+#main {
+    width: 100%;
+    margin-bottom: 10%;
+    
+}   
+/* 공지사항 글씨 */
+caption {
+    font-weight: bold;
+    color: black;
+    font-size: 30px;
+}
+/* 테이블 */
+#table {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+table {
+    width: 100%;
+}
+tr :first-child , tr :nth-child(3) , tr :nth-child(4) , tr :last-child{
+    padding: 8px 30px;
+}
+tr :nth-child(2) {
+    padding: 8px 200px 8px 20px;
+}
+
+th {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    padding-left: 30px;
+    font-size: 20px;
+}
+tr {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 30px;
+    padding-left: 30px;
+
+}
+/* 페이지네이션 */
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination-wrap li {
+    padding: 3px 8px;
+    margin: 3px;
+    border: 1px solid lightgray;
+}
+ul > i {
+    color: lightgray;
+    margin: 5px;
+}
+.search-wrap {
+    text-align: center;
+    margin-top: 60px;
+}
+/* 찾기 랑 버튼 */
+.search-wrap > form > input[type = textfield] {
+    /* border-color: lightgray; */
+    border: none;
+    background-color: rgb(233, 233, 233);
+    padding: 3px;
+    padding-right: 15px;
+    border-radius: 50px;
+    position: relative;
+}
+.search-wrap  input[type = button] {
+    border: none;
+    background-color: rgb(233, 233, 233);
+    padding: 4px 15px;
+    margin-top:45px;
+}
+.search-wrap i {
+    
+    position: relative;
+    right: 45%;
+    color: gray;
+}
+.search-wrap > input[type = textfield]::placeholder {
+    padding-left: 10px;
+}
+.search-wrap > div {
+    position: relative;
+}
+/* 버튼 색 바꾸기 */
+/* 
+.search-wrap > input {
+    background-color: #000000;
+} */
+
+/* footer */
+footer {
+    width: 100%;
+    height: 120px;
+    background-color: rgb(41, 41, 96);
+    position: absolute;
+    bottom: 0;
+}
+
+.copyright-wrap {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    transform: translateY(250%);
+}
+
+.copyright-text {
+    text-align: center;
+    
+    color: rgb(255, 255, 255);
+}
+@media screen and (max-width:480px) {
+    #table {
+        margin-top: 0;
+        margin-bottom: 0;
+
+    }
+    tr {
+        height: 30px;
+    
+    }
+    
+    
+}

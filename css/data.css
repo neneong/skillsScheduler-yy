@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'Noto-Sans KR';
+    src: url('./Noto_Sans_KR/NotoSansKR-Regular.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Noto-Sans KR';
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+.wrap {
+    overflow: hidden;
+    width: auto;
+    
+}
+
+header {
+    width: 100%;
+    background-color: rgb(41, 41, 96);
+    height: 70px;
+    
+}
+#header-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(41, 41, 96);
+    height: 100%;
+    
+}
+
+header li a:hover {
+    color: rgb(255, 196, 0);
+    text-decoration: unset;
+}
+
+.list-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px;
+}
+
+.fa-calendar {
+    font-size: 40px;
+    color: #F1F0EC;
+    
+}
+.list-menu a:nth-child(1) {
+  margin: 0px 15px;
+}
+.list-menu > li > a {
+    color: rgb(255, 255, 255);
+}
+.action i {
+    font-size: 15px;
+    color: rgb(83, 83, 173);
+}
+.login a, .logout a {
+    border-radius: 20px;
+    padding: 5px 30px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* 메인 */
+
+
+
+/* footer */
+footer {
+    z-index: 10000000;
+    width: 100%;
+    height: 120px;
+    background-color: rgb(41, 41, 96);
+    position: absolute;
+    bottom: -100%;
+}
+#copyright {
+    position: relative;
+    bottom:0%;
+}
+.copyright-wrap {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    transform: translateY(250%);
+}
+
+.copyright-text {
+    align-items: center;
+    color: #fff;
+}
+
+
+
+
+
+body {
+  overflow-x: hidden;
+}
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+    background-color: rgb(251, 251, 251);
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 300px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sidebar header {
+  background-color: rgb(22, 22, 72);
+  font-size: 20px;
+  line-height: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav a{
+  background: none;
+  border-bottom: 1px solid #e0e0e0;
+  color: #767676;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+#sidebar .nav a:hover{
+  background: none;
+  color: #000000;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
+}
+
+#main-senter {
+    background-color: rgba(22, 22, 72, 0.597);
+    height: 300px;
+}
+
+.title .title-wrap {
+    text-align: center;
+    padding: 100px;
+}
+
+.title .title-wrap small {
+    font-size: 13px;
+    color: rgb(226, 226, 226);
+}
+
+.title .title-wrap .tit {
+    color: white;
+}
+
+.title .title-wrap span {
+    color: white;
+    font-size: 50px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#main-history {
+    position: relative;
+}
+
+#main-history .history-wrap table {
+    position: absolute;
+    right: 3%;
+    width: 80%;
+}
+
+#main-history .history-wrap thead th {
+    font-size: 18px;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+#main-history .history-wrap tbody td {
+    padding: 13px;
+   
+}
+
+.ico {
+    font-weight: bolder;
+}
+
+.ico2 {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #d0d0d0;
+}
+
+.re {
+    color: red;
+}
+.ap {
+    color: blue;
+}
+@media screen and (max-width:480) {
+    #main-history .history-wrap table {
+        position: absolute;
+        right: 3%;
+        width: 100%;
+    }
+    
+    
+}
